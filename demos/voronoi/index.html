@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <p>Drag the points to re-calculate the graphics / SHIFT + Click to add points </p>
+        <div id="canvasContainer"></div>
+        <p>
+            Render: 
+            <input type="checkbox" id="hull">
+            <label for="hull">Hull</label>
+
+            <input type="checkbox" id="points" checked>
+            <label for="points">Points</label>
+
+            <input type="checkbox" id="triangles" checked>
+            <label for="triangles">Triangulation</label>
+
+            <input type="checkbox" id="voronoi" checked>
+            <label for="voronoi">Voronoi</label>
+
+            <input type="checkbox" id="circ">
+            <label for="circ">Circumcenters</label>
+        </p>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
+        <script src="https://unpkg.com/d3-delaunay@4.1.5/dist/d3-delaunay.min.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
