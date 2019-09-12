@@ -147,22 +147,20 @@ body {
 }
 
 #about {
-    transform:rotate(-90deg);
-    left:0;
-    bottom:40vh;
-    border-radius:0px 0px 100px 100px;
+    bottom:0;
+    left:30vw;
+    border-radius:100px 100px 0px 0px;
 }
 
 #work {
-    transform:rotate(90deg);
-    right:0;
-    bottom:40vh;
-    border-radius:0px 0px 100px 100px;
+    bottom:0;
+    left:45vw;
+    border-radius:100px 100px 0px 0px;
 }
 
 #contact {
     bottom:0;
-    left:45vw;
+    left:60vw;
     border-radius:100px 100px 0px 0px;
 }
 
@@ -183,7 +181,7 @@ body {
     width:90vw;
     height:90vh;
     padding:5vh 5vw;
-    background:adjust-color($primary-color, $alpha: -0.3);
+    background:adjust-color(#000, $alpha: -0.2);
     color:#fff;
     z-index:9;
     top: 0;

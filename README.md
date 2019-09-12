@@ -3,7 +3,7 @@ My portfolio and js projects host. This site use Jekyll to mount the page and bl
 
 
 ## Install
-    Install Ruby
+    sudo apt-get install ruby-full
 
     gem install bundler
 
