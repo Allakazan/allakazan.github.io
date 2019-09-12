@@ -67,7 +67,11 @@ function toggleBlur(toggle = true)
     }
 }
 
-fetch('shaders/sin2.frag')
+const scale = (num, in_min, in_max, out_min, out_max) => {
+    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+fetch('shaders/fire.frag')
 .then((res) => {
     return res.text();
 })
@@ -75,17 +79,26 @@ fetch('shaders/sin2.frag')
     let canvas = document.getElementById('webGlCanvas')
     let gl = new GlslCanvas(canvas);
 
-    setsize(canvas, gl)
+    
 
+    setsize(canvas, gl)
     window.addEventListener("resize", e => {
         setsize(canvas, gl)
     });
 
-    window.addEventListener('mousemove', e => {
-        gl.setMouse({x: 0, y: 0})
-    });
-
     gl.load(shader);
+    gl.setUniform('c_flames', .3)
+    gl.setUniform('c_moviment', 0, 0)
+
+    window.addEventListener('mousemove', e => {
+        let x = e.clientX
+        let y = e.clientY
+
+        let glX = scale(x, 0, document.documentElement.clientWidth, .3, .7)
+        let glY = scale(y, 0, document.documentElement.clientHeight, 1, 0)
+
+        gl.setUniform('c_moviment', glX, glY)
+    });
 });
 
 setTimeout(function(){

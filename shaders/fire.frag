@@ -7,8 +7,10 @@ precision mediump float;
 
 
 uniform float u_time;
-//uniform vec2 mouse;
 uniform vec2 u_resolution;
+
+uniform float c_flames;
+uniform vec2 c_moviment;
 
 
 //
@@ -157,8 +159,8 @@ vec2 noiseStackUV(vec3 pos,int octaves,float falloff,float diff){
 }
 
 void main(  ) {
-	vec2 drag = vec2(0.0, 0.0); //mouse.xy;
-	vec2 offset = vec2(0.0, 0.0); //mouse.xy;
+	vec2 drag = c_moviment;
+	vec2 offset = c_moviment;
 		//
 	float xpart = gl_FragCoord.x/u_resolution.x;
 	float ypart = gl_FragCoord.y/u_resolution.y;
@@ -169,12 +171,12 @@ void main(  ) {
 	float ypartClipped = min(ypartClip,1.0);
 	float ypartClippedn = 1.0-ypartClipped;
 	//
-	float xfuel = 1.0-abs(2.0*xpart-1.0);//pow(1.0-abs(2.0*xpart-1.0),0.5);
+	float xfuel = max(0.0, (0.5 + c_moviment.y) -abs(2.0*xpart-1.0)); //c_fuel-abs(2.0*xpart-1.0); //pow(c_fuel-abs(2.0*xpart-1.0),0.5);
 	//
 	float u_timeSpeed = 0.5;
 	float realu_time = u_timeSpeed*u_time;
 	//
-	vec2 coordScaled = 0.01*gl_FragCoord.xy - 0.02*vec2(offset.x,0.0);
+	vec2 coordScaled = 0.01*gl_FragCoord.xy - vec2(offset.x,0.0);
 	vec3 position = vec3(coordScaled,0.0) + vec3(1223.0,6434.0,8425.0);
 	vec3 flow = vec3(4.1*(0.5-xpart)*pow(ypartClippedn,4.0),-2.0*xfuel*pow(ypartClippedn,64.0),0.0);
 	vec3 timing = realu_time*vec3(0.0,-1.7,1.1) + flow;
@@ -185,15 +187,15 @@ void main(  ) {
 	vec3 noiseCoord = (vec3(2.0,1.0,1.0)*position+timing+0.4*displace3)/1.0;
 	float noise = noiseStack(noiseCoord,3,0.4);
 	//
-	float flames = pow(ypartClipped,0.3*xfuel)*pow(noise,0.3*xfuel);
+	float flames = pow(ypartClipped,.3*xfuel)*pow(noise,.3*xfuel);
 	//
 	float f = ypartClippedFalloff*pow(1.0-flames*flames*flames,8.0);
 	float fff = f*f*f;
-	vec3 fire = 1.5*vec3(f, fff, fff*fff);
+	vec3 fire = 1.2*vec3(f, fff, fff*fff);
 	//
 	// smoke
 	float smokeNoise = 0.5+snoise(0.4*position+timing*vec3(1.0,1.0,0.2))/2.0;
-	vec3 smoke = vec3(0.3*pow(xfuel,3.0)*pow(ypart,2.0)*(smokeNoise+0.4*(1.0-noise)));
+	vec3 smoke = vec3(0.05*pow(xfuel,3.0)*pow(ypart,2.0)*(smokeNoise+0.4*(1.0-noise)));
 	//
 	// sparks
 	float sparkGridSize = 30.0;
@@ -202,7 +204,7 @@ void main(  ) {
 	sparkCoord += 100.0*flow.xy;
 	if (mod(sparkCoord.y/sparkGridSize,2.0)<1.0) sparkCoord.x += 0.5*sparkGridSize;
 	vec2 sparkGridIndex = vec2(floor(sparkCoord/sparkGridSize));
-	float sparkRandom = prng(sparkGridIndex);
+	float sparkRandom = prng(sparkGridIndex); //* (1.0 + c_fuel * 0.5)
 	float sparkLife = min(10.0*(1.0-min((sparkGridIndex.y+(190.0*realu_time/sparkGridSize))/(24.0-20.0*sparkRandom),1.0)),1.0);
 	vec3 sparks = vec3(0.0);
 	if (sparkLife>0.0) {

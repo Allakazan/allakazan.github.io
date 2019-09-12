@@ -5,8 +5,7 @@ precision mediump float;
 uniform float u_time;
 uniform vec2 u_resolution;
 
-vec3 COLOR1 = vec3(0.0, 0.0, 0.30);
-vec3 COLOR2 = vec3(0.50, .0, 0.0);
+vec3 COLOR = vec3(0.6549, 0.0275, 0.2902);
 
 float BLOCK_WIDTH = 0.01; 
 
@@ -22,18 +21,18 @@ void main( void ) {
 	float c2 = mod(position.y, 2.0 * BLOCK_WIDTH);
 	c2 = step(BLOCK_WIDTH, c2);
 	
-	final_color = vec3(0.);//mix( position.x * COLOR1,  position.y * COLOR2, c1 * c2);
+	final_color = vec3(0.);
 	
 	
 	 // creating the wave
-	position = -1.0 + 2.0 * position;
+	position = -0.5 + 2.0 * position;
 	float lineWidth = 0.0;
 	vec2 sPos = position ;
 	for( float i = 0.0; i < 13.; i++) {
 		sPos.y += (0.07 * sin(position.x + i/5.0+ u_time*2.));
 		
 		lineWidth  =  abs(1.0 / (1000.0 * sPos.y));
-		final_color = final_color + vec3(lineWidth * 2.9, lineWidth*0., lineWidth * 1.); 
+		final_color = final_color + vec3(lineWidth * 2.5, lineWidth*0., lineWidth * 4.) * COLOR; 
 		
 	}
 	
