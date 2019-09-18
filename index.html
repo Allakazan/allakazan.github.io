@@ -93,6 +93,11 @@ title: Bruno Marques
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
             laboris nisi ut aliquip ex ea commodo consequat.
         </p>
+	<ul>
+    {% for repo in site.repositories %}
+        <li><p>{{ repo.name }}</p></li>
+    {% endfor %}
+	</ul>
     </section>
     <section>
         <h2>skills</h2>
