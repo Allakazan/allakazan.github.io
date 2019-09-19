@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Allakazan/allakazan.github.io#readme",
   "dependencies": {
+    "github-emoji": "^1.1.0",
     "request": "^2.88.0"
   }
 }
