@@ -77,20 +77,18 @@ function toggleBlur(toggle = true)
     }
 }
 
-function debounce(func, wait, immediate) {
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
-};
+const throttle = (func, limit) => {
+    let inThrottle
+    return function () {
+        const args = arguments
+        const context = this
+        if (!inThrottle) {
+            func.apply(context, args)
+            inThrottle = true
+            setTimeout(() => inThrottle = false, limit)
+        }
+    }
+}
 
 
 const scale = (num, in_min, in_max, out_min, out_max) => {
@@ -116,10 +114,11 @@ if (window.mobileAndTabletcheck())
         });
     
         gl.load(shader);
-        gl.setUniform('c_flames', .3)
+        gl.setUniform('c_sparks', 0)
+        gl.setUniform('c_smoke', 1)
         gl.setUniform('c_moviment', .7, .7)
     
-        window.addEventListener('mousemove', debounce(e => {
+        window.addEventListener('mousemove', throttle(e => {
             let x = e.clientX
             let y = e.clientY
     
@@ -127,7 +126,7 @@ if (window.mobileAndTabletcheck())
             let glY = scale(y, 0, document.documentElement.clientHeight, 1, 0)
     
             gl.setUniform('c_moviment', glX, glY)
-        }, 1));
+        }, 40));
     });
 }
 

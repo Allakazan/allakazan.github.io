@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require('path');
 const request = require('request');
 const emoji = require("github-emoji");
 
@@ -7,7 +8,7 @@ const options = {
     headers: {
       'User-Agent': 'Node Request'
     }
-  };
+}
 
 function convertToEmoji(text) {
     if (text == null) return;
@@ -52,6 +53,41 @@ request(options, (error, response, body) => {
             }
         })
 
-        console.log(data)
-      }
+        const reposDir = '_repositories';
+
+        // Delete all files from the folder
+        fs.readdir(reposDir, (err, files) => {
+            if (err) throw err;
+
+            for (const file of files) {
+                fs.unlink(path.join(reposDir, file), err => {
+                    if (err) throw err;
+                });
+            }
+        });
+
+        //Create .md files
+        for (let repo of data)
+        {
+            fs.open(path.join(reposDir, repo.name+'.md'), 'w', (err, file) => {
+                if (err) throw err;
+
+                let content = 
+                    '---\n'+
+                    `name: ${repo.name}\n`+
+                    `description: ${repo.description}\n`+
+                    `lang: ${repo.lang}\n`+
+                    `stars: ${repo.stars}\n`+
+                    `forks: ${repo.forks}\n`+
+                    `url: ${repo.url}\n`+
+                    '---'
+
+                fs.writeFile(path.join(reposDir, repo.name+'.md'), content.replace('                    ',''), err => {
+                    if (err) throw err;
+                    
+                    console.log(repo.name+' file created in write mode.\n');
+                }); 
+            }); 
+        }
+    }
 });

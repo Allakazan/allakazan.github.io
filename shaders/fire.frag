@@ -9,7 +9,8 @@ precision mediump float;
 uniform float u_time;
 uniform vec2 u_resolution;
 
-uniform float c_flames;
+uniform bool c_sparks;
+uniform bool c_smoke;
 uniform vec2 c_moviment;
 
 
@@ -194,29 +195,38 @@ void main(  ) {
 	vec3 fire = 1.2*vec3(f, fff, fff*fff);
 	//
 	// smoke
-	float smokeNoise = 0.5+snoise(0.4*position+timing*vec3(1.0,1.0,0.2))/2.0;
-	vec3 smoke = vec3(0.05*pow(xfuel,3.0)*pow(ypart,2.0)*(smokeNoise+0.4*(1.0-noise)));
+    vec3 smoke = vec3(0.);
+
+    if (c_smoke) {
+	    float smokeNoise = 0.5+snoise(0.4*position+timing*vec3(1.0,1.0,0.2))/2.0;
+	    smoke = vec3(0.05*pow(xfuel,3.0)*pow(ypart,2.0)*(smokeNoise+0.4*(1.0-noise)));
+    }
+
 	//
 	// sparks
-	float sparkGridSize = 30.0;
-	vec2 sparkCoord = gl_FragCoord.xy - vec2(2.0*offset.x,190.0*realu_time);
-	sparkCoord -= 30.0*noiseStackUV(0.01*vec3(sparkCoord,30.0*u_time),1,0.4,0.1);
-	sparkCoord += 100.0*flow.xy;
-	if (mod(sparkCoord.y/sparkGridSize,2.0)<1.0) sparkCoord.x += 0.5*sparkGridSize;
-	vec2 sparkGridIndex = vec2(floor(sparkCoord/sparkGridSize));
-	float sparkRandom = prng(sparkGridIndex); //* (1.0 + c_fuel * 0.5)
-	float sparkLife = min(10.0*(1.0-min((sparkGridIndex.y+(190.0*realu_time/sparkGridSize))/(24.0-20.0*sparkRandom),1.0)),1.0);
-	vec3 sparks = vec3(0.0);
-	if (sparkLife>0.0) {
-		float sparkSize = xfuel*xfuel*sparkRandom*0.08;
-		float sparkRadians = 999.0*sparkRandom*2.0*PI + 2.0*u_time;
-		vec2 sparkCircular = vec2(sin(sparkRadians),cos(sparkRadians));
-		vec2 sparkOffset = (0.5-sparkSize)*sparkGridSize*sparkCircular;
-		vec2 sparkModulus = mod(sparkCoord+sparkOffset,sparkGridSize) - 0.5*vec2(sparkGridSize);
-		float sparkLength = length(sparkModulus);
-		float sparksGray = max(0.0, 1.0 - sparkLength/(sparkSize*sparkGridSize));
-		sparks = sparkLife*sparksGray*vec3(1.0,0.3,0.0);
-	}
+    vec3 sparks = vec3(0.0);
+
+    if (c_sparks) {
+        float sparkGridSize = 30.0;
+        vec2 sparkCoord = gl_FragCoord.xy - vec2(2.0*offset.x,190.0*realu_time);
+        sparkCoord -= 30.0*noiseStackUV(0.01*vec3(sparkCoord,30.0*u_time),1,0.4,0.1);
+        sparkCoord += 100.0*flow.xy;
+        if (mod(sparkCoord.y/sparkGridSize,2.0)<1.0) sparkCoord.x += 0.5*sparkGridSize;
+        vec2 sparkGridIndex = vec2(floor(sparkCoord/sparkGridSize));
+        float sparkRandom = prng(sparkGridIndex); //* (1.0 + c_fuel * 0.5)
+        float sparkLife = min(10.0*(1.0-min((sparkGridIndex.y+(190.0*realu_time/sparkGridSize))/(24.0-20.0*sparkRandom),1.0)),1.0);
+        if (sparkLife>0.0) {
+            float sparkSize = xfuel*xfuel*sparkRandom*0.08;
+            float sparkRadians = 999.0*sparkRandom*2.0*PI + 2.0*u_time;
+            vec2 sparkCircular = vec2(sin(sparkRadians),cos(sparkRadians));
+            vec2 sparkOffset = (0.5-sparkSize)*sparkGridSize*sparkCircular;
+            vec2 sparkModulus = mod(sparkCoord+sparkOffset,sparkGridSize) - 0.5*vec2(sparkGridSize);
+            float sparkLength = length(sparkModulus);
+            float sparksGray = max(0.0, 1.0 - sparkLength/(sparkSize*sparkGridSize));
+            sparks = sparkLife*sparksGray*vec3(1.0,0.3,0.0);
+        }
+    }
+
 	//
 	gl_FragColor = vec4(max(fire,sparks)+smoke,1.0);
 }
