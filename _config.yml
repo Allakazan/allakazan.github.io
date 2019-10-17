@@ -1,6 +1,7 @@
 name: Bruno Marques
 markdown: kramdown
 theme: null
+main_color: '#ffe81f'
 exclude:
   - node_modules/
   - package.json

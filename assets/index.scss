@@ -6,7 +6,7 @@
 
 //BE13F0
 //#069ce6
-$primary-color: rgb(139, 8, 8);
+$primary-color: {{ site.main_color }};
 
 .blur-when-open {
     transition: 0.5s filter linear;
@@ -30,11 +30,13 @@ body {
     font-family: 'Josefin Sans', sans-serif;
 }
 
+// Loading 
+
 #loading {
     width: 100vw;
     height: 100vh;
     position: fixed;
-    background: $primary-color;
+    background: #000;
     z-index: 999;
     display: flex;
     justify-content: center;
@@ -46,8 +48,8 @@ body {
     animation: rotate 0.56s infinite linear;
     width:50px;
     height:50px;
-    border:12px solid #fff;
-    border-bottom:12px solid $primary-color;
+    border:12px solid $primary-color;
+    border-bottom:12px solid #000;
     border-radius:50%;
     margin:0;
 }
@@ -57,41 +59,18 @@ body {
     100% {transform: rotate(360deg);}
 }
 
-#box {
-    width:100vw;
-    height:100vh;
-    z-index:9;
-    position:fixed;
-    top:0;
+// Content
 
-    div {
-        width:16.66vw;
-        height:100%;
-        display:inline-block;
-    }
+h1 {
+    margin: 0;
+    padding-block-start: 0.67em;
+    padding-block-end: 0.67em;
 }
 
-.box1 {
-    background:$primary-color;
-}
-
-.box2 {
-    background:$primary-color;
-    margin-left:-5px;
-}
-
-#menu {
-    width:100%;
-    text-align:center;
-    margin:6vh 0px;
-    display:none;
-
-    a {
-        margin:0px 6%;
-        font-size:19px;
-        color:#fff;
-        text-decoration:underline;
-    }
+h2 {
+    margin: 0;
+    padding-block-start: 0.83em;
+    padding-block-end: 0.83em;
 }
 
 #middle {
@@ -123,45 +102,31 @@ body {
     }
 }
 
-.home-button {
+.scroll-icon {
+    bottom:0;
+    left:45vw;
     width:10vw;
     height:10vw;
     text-align:center;
     font-size:25px;
     background:transparent;
     color:#fff;
-    position:fixed;
+    position: absolute;
     display:flex;
     flex-direction: column;
     justify-content:center;
     z-index:4;
-    transition:0.4s ease-in-out;
-};
 
-#about, #work, #contact {
-    @extend .home-button;
-    &:hover {
-        background: adjust-color($primary-color, $alpha: -0.1);
-        cursor:pointer;
-    }
+    animation-name: floating2;
+    animation-duration: .85s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
-#about {
-    bottom:0;
-    left:30vw;
-    border-radius:100px 100px 0px 0px;
-}
-
-#work {
-    bottom:0;
-    left:45vw;
-    border-radius:100px 100px 0px 0px;
-}
-
-#contact {
-    bottom:0;
-    left:60vw;
-    border-radius:100px 100px 0px 0px;
+@keyframes floating2 {
+    from { transform: translate(0, 0px); }
+    50%  { transform: translate(0, 10px); }
+    to   { transform: translate(0, 0px); }
 }
 
 .social {
@@ -177,6 +142,7 @@ body {
         color:$primary-color;
     }
 }
+
 .container {
     width:90vw;
     height:90vh;
@@ -306,6 +272,7 @@ body {
 ::placeholder {
     color:#fff;
 }
+
 #footer {
     color:#fff;
     width:92vw;
@@ -340,13 +307,16 @@ body {
 	background: $primary-color;
 }
 
-@media (max-width: 800px){ 
-    #about, #contact, #work {
+@media (max-width: 800px) {
+
+    .scroll-icon {
         display:none;
     }
+
     #footer {
         text-align:center;
     }
+
     #middle {
         width:90vw;
         padding:0px 5vw;
@@ -355,6 +325,7 @@ body {
             width:80%;
         }
     }
+
     .container form {
         input {
             width:90%;
@@ -365,15 +336,14 @@ body {
         }
     }
 
-    #menu {
-        display:inline-block;
-    }
     #onlywide {
         display:none !important;
     }
+
     .box2 {
         margin-left:0px !important;
     }
+
     #box div {
         width:100%;
     }

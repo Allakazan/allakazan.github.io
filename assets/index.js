@@ -6,55 +6,6 @@ window.mobileAndTabletcheck = function() {
     return check;
 };
 
-function showabout(){
-    $("#about_container").css("display","inherit");
-    $("#about_container").addClass("animated slideInLeft");
-    setTimeout(function(){
-        $("#about_container").removeClass("animated slideInLeft");
-    },800);
-    toggleBlur()
-}
-function closeabout(){
-    $("#about_container").addClass("animated slideOutLeft");
-    setTimeout(function(){
-        $("#about_container").removeClass("animated slideOutLeft");
-        $("#about_container").css("display","none");
-    },800);
-    toggleBlur(false)
-}
-function showwork(){
-    $("#work_container").css("display","inherit");
-    $("#work_container").addClass("animated slideInRight");
-    setTimeout(function(){
-        $("#work_container").removeClass("animated slideInRight");
-    },800);
-    toggleBlur()
-}
-function closework(){
-    $("#work_container").addClass("animated slideOutRight");
-    setTimeout(function(){
-        $("#work_container").removeClass("animated slideOutRight");
-        $("#work_container").css("display","none");
-    },800);
-    toggleBlur(false)
-}
-function showcontact(){
-    $("#contact_container").css("display","inherit");
-    $("#contact_container").addClass("animated slideInUp");
-    setTimeout(function(){
-        $("#contact_container").removeClass("animated slideInUp");
-    },800);
-    toggleBlur()
-}
-function closecontact(){
-    $("#contact_container").addClass("animated slideOutDown");
-    setTimeout(function(){
-        $("#contact_container").removeClass("animated slideOutDown");
-        $("#contact_container").css("display","none");
-    },800);
-    toggleBlur(false)
-}
-
 function setsize (canvas, gl = false) {
     canvas.width = document.documentElement.clientWidth
     canvas.height = document.documentElement.clientHeight
@@ -99,7 +50,7 @@ if (window.mobileAndTabletcheck())
 {
     document.getElementsByTagName("BODY")[0].style.backgroundColor = '#000';
 } else {
-    fetch('shaders/fire.frag')
+    fetch('shaders/space.frag')
     .then((res) => {
         return res.text();
     })
@@ -114,11 +65,9 @@ if (window.mobileAndTabletcheck())
         });
     
         gl.load(shader);
-        gl.setUniform('c_sparks', 0)
-        gl.setUniform('c_smoke', 1)
         gl.setUniform('c_moviment', .7, .7)
     
-        window.addEventListener('mousemove', throttle(e => {
+        /*window.addEventListener('mousemove', throttle(e => {
             let x = e.clientX
             let y = e.clientY
     
@@ -126,18 +75,15 @@ if (window.mobileAndTabletcheck())
             let glY = scale(y, 0, document.documentElement.clientHeight, 1, 0)
     
             gl.setUniform('c_moviment', glX, glY)
-        }, 40));
+        }, 40));*/
     });
 }
 
-setTimeout(function(){
+setTimeout(function() {
     $("#loading").addClass("animated fadeOut");
-    setTimeout(function(){
+    setTimeout(function() {
       $("#loading").removeClass("animated fadeOut");
       $("#loading").css("display","none");
-      $("#box").css("display","none");
-      $("#about").removeClass("animated fadeIn");
-      $("#contact").removeClass("animated fadeIn");
       $("#work").removeClass("animated fadeIn");
     },1000);
 },1500);
