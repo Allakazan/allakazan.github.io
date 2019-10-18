@@ -1,4 +1,7 @@
-let blurElements = document.querySelectorAll('.blur-when-open')
+document.addEventListener("DOMContentLoaded", function(event) {
+   
+    new FullPageSlider(8).init()
+});
 
 window.mobileAndTabletcheck = function() {
     var check = false;
@@ -13,18 +16,6 @@ function setsize (canvas, gl = false) {
     if (gl)
     {
         gl.setUniform("u_resolution",canvas.width,canvas.height);
-    }
-}
-
-function toggleBlur(toggle = true)
-{
-    for(let blurElement of blurElements)
-    {
-        if (toggle) {
-            blurElement.classList.add('blur-active')
-        } else {
-            blurElement.classList.remove('blur-active')
-        }
     }
 }
 
@@ -81,9 +72,9 @@ if (window.mobileAndTabletcheck())
 
 setTimeout(function() {
     $("#loading").addClass("animated fadeOut");
+    $("#spinner").remove()
     setTimeout(function() {
       $("#loading").removeClass("animated fadeOut");
       $("#loading").css("display","none");
-      $("#work").removeClass("animated fadeIn");
     },1000);
 },1500);

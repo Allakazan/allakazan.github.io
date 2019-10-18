@@ -73,9 +73,34 @@ h2 {
     padding-block-end: 0.83em;
 }
 
+.scene {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height:100vh;
+    perspective: 1000px;
+    z-index: 300;
+}
+
+.slider {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform: translateZ(-288px);
+    transform-style: preserve-3d;
+    transition: transform 1s cubic-bezier(.38,.14,.15,1.14);
+}
+
+.slider-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1s;
+    background: transparent;
+    backface-visibility: hidden;
+}
+
 #middle {
-    width:100vw;
-    height:90vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -84,7 +109,6 @@ h2 {
     text-align:center;
     z-index:1;
     color:#fff;
-    padding-bottom:10vh;
 
     h1 {
         color:$primary-color;
@@ -100,30 +124,46 @@ h2 {
             text-align:center;
         }
     }
+
+    .scroll-icon {
+        bottom:0;
+        left:45vw;
+        width:10vw;
+        height:10vw;
+        text-align:center;
+        font-size:25px;
+        background:transparent;
+        color:#fff;
+        position: absolute;
+        display:flex;
+        flex-direction: column;
+        justify-content:center;
+        z-index:4;
+    
+        animation-name: floating;
+        animation-duration: .85s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    #footer {
+        color:#fff;
+        width:92vw;
+        padding:5vh 4vw;
+        text-align:right;
+        position:fixed;
+        z-index:1;
+        bottom:0;
+        font-size:16px;
+        font-weight:bold;
+    
+        a {
+            color:$primary-color ;
+        }
+    }
 }
 
-.scroll-icon {
-    bottom:0;
-    left:45vw;
-    width:10vw;
-    height:10vw;
-    text-align:center;
-    font-size:25px;
-    background:transparent;
-    color:#fff;
-    position: absolute;
-    display:flex;
-    flex-direction: column;
-    justify-content:center;
-    z-index:4;
-
-    animation-name: floating2;
-    animation-duration: .85s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-
-@keyframes floating2 {
+@keyframes floating {
     from { transform: translate(0, 0px); }
     50%  { transform: translate(0, 10px); }
     to   { transform: translate(0, 0px); }
@@ -271,22 +311,6 @@ h2 {
 
 ::placeholder {
     color:#fff;
-}
-
-#footer {
-    color:#fff;
-    width:92vw;
-    padding:5vh 4vw;
-    text-align:right;
-    position:fixed;
-    z-index:1;
-    bottom:0;
-    font-size:16px;
-    font-weight:bold;
-
-    a {
-        color:$primary-color ;
-    }
 }
 
 ::-webkit-scrollbar {
