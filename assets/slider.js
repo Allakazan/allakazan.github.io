@@ -83,6 +83,11 @@ function FullPageSlider(cellCount = this.cells.length) {
 
     this.rotateSlider = function()
     {
+        let pointer = (this.selectedIndex * -1) + 1
+        
+        if (pointer < 1  || pointer > this.cells.length)
+            return
+        
         let angle = this.theta * this.selectedIndex * -1
         this.slider.style.transform = 'translateZ(' + -this.radius + 'px) ' + this.rotateFn + '(' + angle + 'deg)'
     }

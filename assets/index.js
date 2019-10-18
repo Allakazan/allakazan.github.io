@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
    
-    new FullPageSlider(8).init()
+    new FullPageSlider(12).init()
 });
 
 window.mobileAndTabletcheck = function() {

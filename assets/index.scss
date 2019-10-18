@@ -3,6 +3,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
 
+@font-face {
+    font-family: "StarWars";
+    src: url("fonts/DistantGalaxy.ttf");
+}
+
+@font-face {
+    font-family: "StarWarsOutline";
+    src: url("fonts/DistantGalaxyOutline.ttf");
+}
 
 //BE13F0
 //#069ce6
@@ -112,8 +121,10 @@ h2 {
 
     h1 {
         color:$primary-color;
-        font-size:70px;
-        text-decoration:underline;
+        font-size:80px;
+        font-family: StarWars;
+        font-weight: normal;
+        padding-block-end: 0.6em;
     }
 
     table {
@@ -184,17 +195,11 @@ h2 {
 }
 
 .container {
-    width:90vw;
-    height:90vh;
-    padding:5vh 5vw;
-    background:adjust-color(#000, $alpha: -0.2);
     color:#fff;
-    z-index:9;
     top: 0;
     position:fixed;
     max-height:100vh;
     overflow-y:auto;
-    display:none;
 
     div {
         font-size:25px;
@@ -208,11 +213,18 @@ h2 {
 
     section {
         margin:8vh 0px;
+        padding:5vh 5vw;
+        padding-bottom: 0
     }
 
     h1 {
-        font-size:60px;
-        text-decoration:underline;
+        font-size:50px;
+        padding-block-start: 4vw;
+        padding-block-end: 0;
+        margin-left: 5vw;
+        color: $primary-color;
+        font-family: StarWars;
+        font-weight: normal;
     }
 
     p {
@@ -275,33 +287,33 @@ h2 {
 .btn_one {
     font-size:18px;
     font-family: 'Josefin Sans', sans-serif;
-    color:#fff;
+    color:$primary-color;
     background:transparent;
-    border:3px solid #fff;
+    border:3px solid $primary-color;
     padding:8px 40px;
     border-radius:80px;
     font-weight:bold;
     margin:2vh 10px;
-    transition:0.4s ease-in-out;
+    transition:0.3s ease-in-out;
 
     &:hover {
         cursor:pointer;
-        color:$primary-color;
-        background:#fff;
+        color:#000;
+        background: $primary-color;
     }
 }
 
 .btn_two {
     font-size:18px;
     font-family: 'Josefin Sans', sans-serif;
-    color:$primary-color;
-    background:#fff;
-    border:3px solid #fff;
+    color: #000;
+    background: $primary-color;
+    border:3px solid $primary-color;
     padding:8px 40px;
     border-radius:80px;
     font-weight:bold;
     margin:2vh 10px;
-    transition:0.4s ease-in-out;
+    transition:0.3s ease-in-out;
 
     &:hover {
         cursor:pointer;
