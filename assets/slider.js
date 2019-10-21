@@ -1,4 +1,4 @@
-function FullPageSlider(cellCount = this.cells.length) {
+function FullPageSlider(cellCount = this.cells.length, waitLimit = 1000) {
 
     this.scene = document.querySelector('.scene')
     this.slider = this.scene.querySelector('.slider')
@@ -6,6 +6,7 @@ function FullPageSlider(cellCount = this.cells.length) {
     this.prevButton = document.querySelector('.slider-prev-btn')
     this.nextButton = document.querySelector('.slider-next-btn')
     this.cellCount = cellCount
+    this.waitLimit = waitLimit
     this.selectedIndex = 0
     this.cellWidth = this.slider.offsetWidth
     this.cellHeight = 0
@@ -19,7 +20,7 @@ function FullPageSlider(cellCount = this.cells.length) {
         this.setHeight()
         window.addEventListener("resize", this.setHeight.bind(this))
 
-        document.addEventListener('wheel', this.throttle(this.wheelAction.bind(this), 1000))
+        document.addEventListener('wheel', this.throttleWheel(this.wheelAction.bind(this), this.waitLimit))
 
         if (this.prevButton)
             this.prevButton.addEventListener('click', this.prev.bind(this))
@@ -53,6 +54,35 @@ function FullPageSlider(cellCount = this.cells.length) {
         this.rotateSlider()
     }
 
+    this.clamp = function(n, min, max)
+    {
+        return Math.min(Math.max(n, min), max)
+    }
+
+    this.throttleWheel = function(callback, limit)
+    {
+        let wait = false;
+        
+        return function ()
+        {
+            let delta = this.clamp(arguments[0].deltaY, -1, 1)
+            let pointer = ((this.selectedIndex * -1) + delta) + 1
+
+            if (pointer < 1  || pointer > this.cells.length)
+                return
+
+            if (!wait)
+            {
+                callback.apply(null, arguments);
+                wait = true;
+
+                setTimeout(function () {
+                    wait = false;
+                }, limit);
+            }
+        }.bind(this)
+    }
+
     this.throttle = function(callback, limit)
     {
         let wait = false;
@@ -83,11 +113,6 @@ function FullPageSlider(cellCount = this.cells.length) {
 
     this.rotateSlider = function()
     {
-        let pointer = (this.selectedIndex * -1) + 1
-        
-        if (pointer < 1  || pointer > this.cells.length)
-            return
-        
         let angle = this.theta * this.selectedIndex * -1
         this.slider.style.transform = 'translateZ(' + -this.radius + 'px) ' + this.rotateFn + '(' + angle + 'deg)'
     }

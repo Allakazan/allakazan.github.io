@@ -97,7 +97,7 @@ h2 {
     position: absolute;
     transform: translateZ(-288px);
     transform-style: preserve-3d;
-    transition: transform 1s cubic-bezier(.38,.14,.15,1.14);
+    transition: transform 1s ease;
 }
 
 .slider-item {
