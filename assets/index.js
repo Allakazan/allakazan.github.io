@@ -41,7 +41,7 @@ if (window.mobileAndTabletcheck())
 {
     document.getElementsByTagName("BODY")[0].style.backgroundColor = '#000';
 } else {
-    fetch('shaders/space.frag')
+    fetch('shaders/space3.frag')
     .then((res) => {
         return res.text();
     })
