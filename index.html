@@ -27,26 +27,6 @@ title: Bruno Marques
             </div>
         </div>
         <div class="slider-item container">
-            <h1>works.</h1>
-            <section>
-                <h2>work title</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                    mollit anim id est laborum.
-                </p>
-                <div id="used">
-                    <div><i class="fas fa-circle"></i>&nbsp;HTML5</div>
-                    <div><i class="fas fa-circle"></i>&nbsp;CSS3</div>
-                    <div><i class="fas fa-circle"></i>&nbsp;Javascript</div>
-                </div>
-                <button class="btn_one">button 1</button>
-                <button class="btn_two">button 2</button>
-            </section>
-        </div>
-        <div class="slider-item container">
             <h1>about.</h1>
             <section>
                 <h2>about me</h2>
@@ -57,21 +37,53 @@ title: Bruno Marques
                     fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
                     mollit anim id est laborum.
                 </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                    mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
+                <h2>skills</h2>
+                <div id="used">
+                    <div><i class="fas fa-circle"></i>&nbsp;HTML5</div>
+                    <div><i class="fas fa-circle"></i>&nbsp;CSS3</div>
+                    <div><i class="fas fa-circle"></i>&nbsp;Javascript</div>
+                    <div><i class="fas fa-circle"></i>&nbsp;Node</div>
+                    <div><i class="fas fa-circle"></i>&nbsp;PHP</div>
+                    <a class="btn_one">See more</a>
+                </div>
+            </section>
+        </div>
+        <div class="slider-item container">
+            <h1>works.</h1>
+            <section>
                 <ul style="list-style-type: none; overflow: hidden">
                 {% assign repos = site.repositories | sort: 'stars' | reverse %}
                 {% for repo in repos %}
                     <li style="float: left; padding: 0 5px"><p>{{ repo.name }}</p></li>
                 {% endfor %}
                 </ul>
+            </section>
+        </div>
+        <div class="slider-item container">
+            <h1>github.</h1>
+            <section>
+                <ul style="list-style-type: none; overflow: hidden">
+                {% assign repos = site.repositories | sort: 'stars' | reverse %}
+                {% for repo in repos %}
+                    <li style="float: left; padding: 0 5px"><p>{{ repo.name }}</p></li>
+                {% endfor %}
+                </ul>
+            </section>
+        </div>
+        <div class="slider-item container">
+            <h1>blog.</h1>
+            <section>
+                <h2>latest</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit anim id est laborum.
+                </p>
+                <br>
+                <a class="btn_one">See More</a>
+                <a class="btn_two">See All Posts</a>
             </section>
         </div>
         <div class="slider-item container">
