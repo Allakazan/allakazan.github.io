@@ -71,6 +71,20 @@ function FullPageSlider(cellCount = this.cells.length, waitLimit = 1000) {
             if (pointer < 1  || pointer > this.cells.length)
                 return
 
+            let scrollEl = this.cells[this.selectedIndex * -1]
+            // this value is arbitrary and i need to play with
+            let offsetCheck = 10;
+
+            // check if cell has scrollbar
+            if (this.selectedIndex != 0 && scrollEl.scrollHeight > scrollEl.clientHeight)
+            {
+                // check if cell scroll aren't in the top or bottom
+                if((scrollEl.scrollTop >= offsetCheck) && 
+                (scrollEl.offsetHeight + scrollEl.scrollTop <= scrollEl.scrollHeight - offsetCheck)) {
+                    return true
+                }
+            }
+
             if (!wait)
             {
                 callback.apply(null, arguments);
