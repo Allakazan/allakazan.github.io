@@ -43,7 +43,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     float t = iTime * 0.1;
     float dist = 0.0;
-    const float layers = 16.0;
+    const float layers = 10.0;
     float scale = 32.0;
     float depth;
     float phase;

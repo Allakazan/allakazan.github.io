@@ -51,21 +51,13 @@ title: Bruno Marques
         <div class="slider-item container">
             <h1>works.</h1>
             <section>
-                <ul style="list-style-type: none; overflow: hidden">
+                <ul class="works-list">
                 {% assign repos = site.repositories | sort: 'stars' | reverse %}
-                {% for repo in repos %}
-                    <li style="float: left; padding: 0 5px"><p>{{ repo.name }}</p></li>
-                {% endfor %}
-                </ul>
-            </section>
-        </div>
-        <div class="slider-item container">
-            <h1>github.</h1>
-            <section>
-                <ul style="list-style-type: none; overflow: hidden">
-                {% assign repos = site.repositories | sort: 'stars' | reverse %}
-                {% for repo in repos %}
-                    <li style="float: left; padding: 0 5px"><p>{{ repo.name }}</p></li>
+                {% for repo in repos limit: 8 %}
+                    <li>
+                        <p>{{ repo.name }}</p>
+                        
+                    </li>
                 {% endfor %}
                 </ul>
             </section>
