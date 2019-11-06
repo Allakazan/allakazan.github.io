@@ -2,8 +2,10 @@
  * Original shader from: https://www.shadertoy.com/view/3d33zM
  */
 
+// precision mediump float;
+
 #ifdef GL_ES
-precision mediump float;
+precision lowp float;
 #endif
 
 // glslsandbox uniforms
