@@ -1,0 +1,14 @@
+name: Bruno Marques
+markdown: kramdown
+theme: null
+exclude:
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - updateRepos.js
+  - Gemfile
+  - Gemfile.lock
+sass:
+  style: compact # possible values: nested expanded compact compressed
+collections:
+  - repositories

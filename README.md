@@ -1,12 +1,13 @@
 # allakazan.github.io
-My portfolio and js projects host
+My portfolio and js projects host. This site use Jekyll to mount the page and blogs
 
 
-## Gitfolio Build
-	gitfolio build allakazan -f --sort star --order desc --theme light --background https://i.imgur.com/uhYUCDP.jpg && cp dist/* .
+## Install
+    sudo apt-get install ruby-full
 
-## Gitfolio Update Data
-	gitfolio update
+    gem install bundler
 
+    bundle install
 
-https://github.com/imfunniee/gitfolio
+## Build
+    bundle exec jekyll serve
