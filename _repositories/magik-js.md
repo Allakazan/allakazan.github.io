@@ -4,5 +4,5 @@ description: Lightweight JS Image Editor
 lang: null
 stars: 0
 forks: 0
-url: https://github.com/Allakazan/magik-js
+link: https://github.com/Allakazan/magik-js
 ---

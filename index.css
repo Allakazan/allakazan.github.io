@@ -314,6 +314,22 @@ body{
     font-size:15px;
 }
 
+.socials {
+    color: #fff;
+    text-decoration: none;
+    margin: 3vh 0px !important;
+  }
+  
+  .socials span {
+    display: inline-block !important;
+    margin-right: 2vw !important;
+    font-weight: normal !important;
+  }
+  
+  .socials span a {
+    font-weight: normal !important;
+  }
+
 #blog_section {
     margin:2vh 0px;
     padding:2vh 0px !important;
@@ -322,6 +338,20 @@ body{
 #blogs {
     columns:2;
 }
+
+#blogs {
+    columns: 2;
+  }
+  
+  #blog_title {
+    font-size: 50px;
+  }
+  
+  #blog_sub_title {
+    font-size: 36px;
+    margin-top: -2vh;
+  }
+  
 
 #blogs section {
     width:85%;

@@ -4,5 +4,5 @@ description: A Neural Network made with Python and Tensorflow (Keras) to classif
 lang: Python
 stars: 1
 forks: 0
-url: https://github.com/Allakazan/Gotta-Predict-Em-All
+link: https://github.com/Allakazan/Gotta-Predict-Em-All
 ---

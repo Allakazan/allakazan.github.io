@@ -79,7 +79,7 @@ request(options, (error, response, body) => {
                     `lang: ${repo.lang}\n`+
                     `stars: ${repo.stars}\n`+
                     `forks: ${repo.forks}\n`+
-                    `url: ${repo.url}\n`+
+                    `link: ${repo.url}\n`+
                     '---'
 
                 fs.writeFile(path.join(reposDir, repo.name+'.md'), content.replace('                    ',''), err => {
