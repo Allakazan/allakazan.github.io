@@ -5,8 +5,8 @@ layout: default
         <div id="spinner"></div>
     </div>
     <div id="profile">
-        <div id="profile_img" style="background: url(https://avatars0.githubusercontent.com/u/25016389?v=4) center;"></div>
-        <div id="username"><span style="display:block;">Bruno Marques</span>@Allakazan</div>
+        <div id="profile_img" style="background: url('{{ site.userimg }}') center;"></div>
+        <div id="username"><span style="display:block;">{{ site.name }}</span>@{{ site.username }}</div>
         <div id="userbio" style="display: block;">Full Stack Programmer</div>
         <div id="about">
                 <span style="display:block;"><i class="fas fa-link"></i> &nbsp; brunorizzardi80014@hotmail.com</span>
@@ -42,7 +42,21 @@ layout: default
         </div>
         <div id="blog_section">
             <h1>Blog.</h1>
-            <div id="blogs"></div>
+            <div id="blogs">
+                {% for post in site.posts %}
+                    <a href="{{ post.url }}" target="_blank">
+                        <section>
+                            <img src="{{ post.thumbnail }}">
+                            <div class="blog_container">
+                                <div class="section_title">{{ post.title }}</div>
+                                <div class="about_section">
+                                    {{ post.subtitle }}
+                                </div>
+                            </div>
+                        </section>
+                    </a>
+                {% endfor %}
+            </div>
         </div>
         <div id="footer">
             <a href="https://github.com/Allakazan" target="_blank">made on space by a alien</a>
@@ -58,7 +72,7 @@ layout: default
         document.getElementById("loading").style.display = "none";
         },800);
     },1500);
-    $.getJSON("blog.json", function(blog){
+    /*$.getJSON("blog.json", function(blog){
         blog = blog || [];
         if(blog.length == 0){
             return document.getElementById("blog_section").style.display = "none";
@@ -80,7 +94,7 @@ layout: default
         }
     }).fail(function(){
         return document.getElementById("blog_section").style.display = "none";
-    });
+    });*/
     </script>
 
 </body></html>

@@ -163,7 +163,7 @@ body{
 
 #blog img {
     width:100%;
-    margin:2vh 0px;
+    margin:1vh 0px;
     border-radius:5px;
     border:1px solid rgb(0, 0, 0, 0.08);
 }
@@ -211,8 +211,13 @@ body{
 #profile_img {
     width:180px;
     height:180px;
+    min-width: 180px;
+    min-height: 180px;
+    max-width: 180px;
+    max-height: 180px;
     border-radius:5px;
     background-size:cover !important;
+    background-repeat: no-repeat !important;
 }
 
 #profile div {
@@ -413,6 +418,10 @@ body{
     #profile_img {
         width:120px;
         height:120px;
+        min-width: 120px;
+        min-height: 120px;
+        max-width: 120px;
+        max-height: 120px;
         margin:0px auto !important;
     }
     #work {
@@ -440,6 +449,16 @@ body{
         margin-top:0vh;
         z-index:1;
     }
+
+    #blog_title {
+        font-size: 32px !important;
+    }
+    
+    #blog_sub_title {
+        font-size: 24px;
+        margin-top: -1vh;
+    }
+
     #profile_blog {
         width:90vw;
         margin:0px 5vw;
@@ -447,6 +466,12 @@ body{
         text-align:left;
         z-index:1;
     }
+
+    #profile_img_blog {
+        width: 65px;
+        height: 65px;
+    }
+
     .go_back {
         position: relative;
         color:var(--text-color);
@@ -468,6 +493,6 @@ body{
   --bg-color: #fff;
   --text-color: rgb(10, 10, 10);
   --blog-gray-color: rgb(80, 80, 80);
-  --background-image: linear-gradient(90deg, rgba(10, 10, 10, 0.4), rgb(10, 10, 10, 0.4)), url("https://i.imgur.com/uhYUCDP.jpg");
+  --background-image: linear-gradient(90deg, rgba(10, 10, 10, 0.4), rgb(10, 10, 10, 0.4)), url("https://i.imgur.com/QT6OV86.jpg");
   --background-background: #fff;
 }

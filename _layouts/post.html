@@ -1,0 +1,57 @@
+---
+layout: default
+---
+<div id="loading">
+    <div id="spinner"></div>
+</div>
+<a href="/" class="go_back"><i class="fas fa-arrow-left"></i></a>
+<div id="background_overlay" ></div>
+<div id="background"></div>
+<table id="profile_blog">
+    <tbody>
+        <tr>
+            <td style="width:8vw;">
+                <div id="profile_img_blog" style="background: url('{{ site.userimg }}') center center"></div>
+            </td>
+            <td style="width:52vw;">
+                <div id="username_blog">
+                    <span style="display:block;">{{ site.name }}</span>@{{ site.username }}<b id="blog_time"></b>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div id="blog-display">
+    <h1 id="blog_title">{{ page.title }}</h1>
+    <h2 id="blog_sub_title">
+        {{ page.subtitle }}
+    </h2>
+    <div id="blog">
+        {{ content }}
+    </div>
+</div>
+<div id="footer_blog">
+    <a href="https://github.com/Allakazan" target="_blank">made on space by a alien</a>
+</div>
+<script type="text/javascript">
+    setTimeout(function () {
+        document.getElementById("loading").classList.add("animated");
+        document.getElementById("loading").classList.add("fadeOut");
+        setTimeout(function () {
+            document.getElementById("loading").classList.remove("animated");
+            document.getElementById("loading").classList.remove("fadeOut");
+            document.getElementById("loading").style.display = "none";
+        }, 800);
+    }, 1500);
+
+    /*
+        if ((user[0].theme = "dark.css")) {
+            document.querySelector("#background_overlay").style.background =
+                "linear-gradient(0deg, rgba(10, 10, 10, 1), rgba(10, 10, 10, 0.1))";
+        } else {
+            document.querySelector("#background_overlay").style.background =
+                "linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.1))";
+        }
+    });
+    */
+</script>
