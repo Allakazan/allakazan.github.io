@@ -1,0 +1,66 @@
+<div id="config_menu">
+    <div class="onoffswitch">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="darkthemeswitch">
+        <label class="onoffswitch-label" for="darkthemeswitch"></label>
+    </div>
+</div>
+<script>
+    (function() {
+
+        if (!localStorage.getItem('darkmode')) {
+            localStorage.setItem('darkmode', false)
+        } else {
+            document.getElementById("darkthemeswitch").checked = localStorage.getItem('darkmode') == 'true';
+        }
+
+        document.getElementById("darkthemeswitch").
+        addEventListener('change', function(e) {
+            let sufix = e.target.checked ? '_dark' : ''
+            
+            localStorage.setItem('darkmode', e.target.checked)
+            setTimeout(function() {
+                document.getElementById('documentStylesheet').href = url+'/index'+sufix+'.css';
+            }, 50)
+        })
+    })()
+</script>
+<style>
+    #config_menu {
+        position: absolute;
+        z-index: 250;
+        right: 4%;
+        top: 4%;
+    }
+    .onoffswitch {
+        position: relative; width: 48px;
+        -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    }
+    .onoffswitch-checkbox {
+        display: none;
+    }
+    .onoffswitch-label {
+        display: block; overflow: hidden; cursor: pointer;
+        height: 20px; padding: 0; line-height: 20px;
+        border: 2px solid #E3E3E3; border-radius: 20px;
+        background-color: #FFFFFF;
+        transition: background-color 0.25s ease-in;
+    }
+    .onoffswitch-label:before {
+        content: "";
+        display: block; width: 20px; margin: 0px;
+        background: #FFFFFF;
+        position: absolute; top: 0; bottom: 0;
+        right: 26px;
+        border: 2px solid #E3E3E3; border-radius: 20px;
+        transition: all 0.2s ease-in 0s; 
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label {
+        background-color: #242424;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    border-color: #242424;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+        right: 0px; 
+    }
+</style>

@@ -121,7 +121,7 @@ body {
 #profile_blog {
   width: 60vw;
   margin: 0px 20vw;
-  margin-top: 34vh;
+  margin-top: 10vh;
   text-align: left;
   z-index: 1;
 }
@@ -492,7 +492,7 @@ body {
   #profile_blog {
     width: 90vw;
     margin: 0px 5vw;
-    margin-top: 36vh;
+    margin-top: 10vh;
     text-align: left;
     z-index: 1;
   }

@@ -2,11 +2,12 @@
 layout: default
 ---
 <div id="loading">
-    <div id="spinner"></div>
+    <!--<div id="spinner"></div>-->
 </div>
 <a href="/" class="go_back"><i class="fas fa-arrow-left"></i></a>
 <div id="background_overlay" ></div>
 <div id="background"></div>
+{% include site_menu.html %}
 <table id="profile_blog">
     <tbody>
         <tr>
@@ -41,17 +42,7 @@ layout: default
             document.getElementById("loading").classList.remove("animated");
             document.getElementById("loading").classList.remove("fadeOut");
             document.getElementById("loading").style.display = "none";
-        }, 800);
-    }, 1500);
+        }, 300);
+    }, 300);
 
-    /*
-        if ((user[0].theme = "dark.css")) {
-            document.querySelector("#background_overlay").style.background =
-                "linear-gradient(0deg, rgba(10, 10, 10, 1), rgba(10, 10, 10, 0.1))";
-        } else {
-            document.querySelector("#background_overlay").style.background =
-                "linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.1))";
-        }
-    });
-    */
 </script>
