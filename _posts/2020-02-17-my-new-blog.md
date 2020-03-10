@@ -3,6 +3,7 @@ layout: post
 title:  "This is my dev blog"
 subtitle:  "Now i must write some content..."
 thumbnail:  "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?fit=crop&w=1350"
+tags: [blog, new]
 ---
 
 ![Wallpaper](https://images.unsplash.com/photo-1515879218367-8466d910aaa4?fit=crop&w=1350)

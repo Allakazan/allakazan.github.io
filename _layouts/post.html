@@ -5,8 +5,7 @@ layout: default
     <!--<div id="spinner"></div>-->
 </div>
 <a href="/" class="go_back"><i class="fas fa-arrow-left"></i></a>
-<div id="background_overlay" ></div>
-<div id="background"></div>
+<div id="background" style="--post-background-image: url({{ page.thumbnail }})"></div>
 {% include site_menu.html %}
 <table id="profile_blog">
     <tbody>
@@ -18,6 +17,7 @@ layout: default
                 <div id="username_blog">
                     <span style="display:block;">{{ site.name }}</span>@{{ site.username }}<b id="blog_time"></b>
                 </div>
+                <p class="date">{{ page.date | date_to_long_string: "short", "PT-BR" }}</p>
             </td>
         </tr>
     </tbody>
@@ -27,6 +27,11 @@ layout: default
     <h2 id="blog_sub_title">
         {{ page.subtitle }}
     </h2>
+    <div id="blog_tags">
+            {% for tag in page.tags %}
+                <a href="#">{{ tag }}</a>
+            {% endfor %}
+    </div>
     <div id="blog">
         {{ content }}
     </div>

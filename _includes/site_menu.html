@@ -15,11 +15,11 @@
 
         document.getElementById("darkthemeswitch").
         addEventListener('change', function(e) {
-            let sufix = e.target.checked ? '_dark' : ''
+            let theme = e.target.checked ? 'dark' : 'light'
             
             localStorage.setItem('darkmode', e.target.checked)
             setTimeout(function() {
-                document.getElementById('documentStylesheet').href = url+'/index'+sufix+'.css';
+                document.getElementById('siteTheme').href = '/static/css/'+theme+'.css';
             }, 50)
         })
     })()
