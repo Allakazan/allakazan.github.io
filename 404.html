@@ -1,0 +1,107 @@
+---
+layout: default
+permalink: /404.html
+---
+<style>
+    body {
+    background: #f5f5f5;}
+
+    .mini {
+    font-size: 1em;
+    color: #000;
+    line-height: 9em;
+    text-indent: 2.5em;
+    position: absolute;
+    left: 50%;
+    top: 50%; 
+    }
+    .mega, .bola{
+    line-height: 1.65em;
+    font-weight: bold;
+    font-size: 11em;
+    color: black;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%; 
+    margin-left: -150px;
+    margin-top: -150px;}
+    
+    .boom {color: #f5f5f5; }
+</style>
+<p class="mega">4<span class="boom">0</span>4<div class="bola">
+</div></p>
+<p class="mini">That's an error.</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
+<script>
+    (function(){
+        Math.clamp = function(a,b,c){return Math.max(b,Math.min(c,a));}
+    })();
+
+    var $container = $('.bola');
+    var renderer = new THREE.WebGLRenderer({antialias: true});
+    var camera = new THREE.PerspectiveCamera(80,1,0.1,10000);
+    var scene = new THREE.Scene();
+    var mouseX = 1;
+    var mouseY = 1;
+
+    var windowHalfX = window.innerWidth / 2;
+    var windowHalfY = window.innerHeight / 2;
+
+    document.addEventListener( 'mousemove', function(e) {
+        mouseX = ( e.clientX - windowHalfX ) / 100;
+		mouseY = ( e.clientY - windowHalfY ) / 100;
+    }, false );
+
+    scene.add(camera);
+    renderer.setSize(300,300);
+    $container.append(renderer.domElement);
+
+    ///////////////////////////////////////////////
+
+    // Camera
+    camera.position.z = 200;
+    camera.position.x = -7;
+
+    // Material
+    var pinkMat = new THREE.MeshPhongMaterial({
+    color      :  new THREE.Color("rgb(150,150,150)"),
+    emissive   :  new THREE.Color("rgb(0,0,0)"),
+    shininess  :  10,
+    shading    :  THREE.FlatShading,
+    transparent: 1,
+    opacity    : 1
+    });
+
+    var L1 = new THREE.PointLight( 0xffffff, .3);
+    L1.position.z = 100;
+    L1.position.y = 100;
+    L1.position.x = 100;
+    scene.add(L1);
+
+    var L2 = new THREE.PointLight( 0xffffff, 0.1);
+    L2.position.z = 200;
+    L2.position.y = 300;
+    L2.position.x = -100;
+    scene.add(L2);
+
+    //var AM = new THREE.AmbientLight( 0x1c1c1c );
+    //scene.add(AM);
+
+    var Ico = new THREE.Mesh(new THREE.IcosahedronGeometry(75,1), pinkMat);
+    Ico.rotation.z = 0.5;
+    scene.add(Ico);
+
+    function update(){
+        Ico.rotation.x+=Math.clamp(Math.cosh(mouseY), -2.5, 2.5)/100;
+        Ico.rotation.y+=Math.clamp(Math.cosh(mouseX), -2.5, 2.5)/100;
+    }
+
+    function render() {
+        requestAnimationFrame(render);			
+        renderer.render(scene, camera);	
+        update();
+    }
+    render();
+</script>

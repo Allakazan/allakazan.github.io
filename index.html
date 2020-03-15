@@ -20,21 +20,19 @@ layout: default
     </div>
     <div id="display">
         {% include site_menu.html %}
-        <div id="work">
+        <div id="demos">
             <h1>Work.</h1>
-            <div class="projects" id="work_section">
-                {% assign repos = site.repositories | sort: 'stars' | reverse %}
-                {% for repo in repos limit: 15 %}
-                    <a href="{{ repo.link }}" target="_blank">
+            <div class="projects">
+                {% assign projects = site.data.projects | sort: 'date' | reverse %}
+                {% for project in projects %}
+                    <a href="{{ project.url }}" target="_blank">
                         <section>
-                            <div class="section_title">{{ repo.name }}</div>
+                            <div class="section_title">{{ project.name }}</div>
                             <div class="about_section">
-                            <span style="display:block;">{{ repo.description }}</span>
+                            <span style="display:block;">{{ project.description }}</span>
                             </div>
                             <div class="bottom_section">
-                                <span style="display:inline-block;"><i class="fas fa-code"></i>&nbsp; {{ repo.lang }}</span>
-                                <span><i class="fas fa-star"></i>&nbsp; {{ repo.stars }}</span>
-                                <span><i class="fas fa-code-branch"></i>&nbsp; {{ repo.forks }}</span>
+                                <span style="display:inline-block;"><i class="fas fa-tags"></i>&nbsp; {% for tag in project.tags %}{{ tag }}{% if forloop.last == false %}, {% endif %}{% endfor %}</span>
                             </div>
                         </section>
                     </a>
@@ -59,10 +57,15 @@ layout: default
                 {% endfor %}
             </div>
         </div>
+        <div id="work">
+            <h1>Github.</h1>
+            <div class="projects" id="work_section"></div>
+        </div>
         <div id="footer">
             <a href="https://github.com/Allakazan" target="_blank">made on space by a alien</a>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-js@3.5.0/lib/emoji.min.js"></script>
     <script type="text/javascript">
     setTimeout(function(){
         document.getElementById("loading").classList.add("animated");
@@ -73,29 +76,38 @@ layout: default
         document.getElementById("loading").style.display = "none";
         },800);
     },1500);
-    /*$.getJSON("blog.json", function(blog){
-        blog = blog || [];
-        if(blog.length == 0){
-            return document.getElementById("blog_section").style.display = "none";
+
+    let emoji = new EmojiConvertor()
+    emoji.use_sheet = false
+    emoji.img_sets.apple.path = 'https://github.githubassets.com/images/icons/emoji/unicode/';
+    emoji.img_suffix = '?v8';
+
+    $.getJSON("https://api.github.com/search/repositories?q=user:allakazan", function(data){
+        repos = data.items || [];
+
+        if(repos.length == 0){
+            return document.getElementById("work").style.display = "none";
         }
-        for(var i = 0; i < blog.length; i++){
-            $("#blogs").append(`
-            <a href="./blog/${blog[i].url_title}" target="_blank">
+        for(var i = 0; i < repos.length; i++){
+            $("#work_section").append(`
+            <a href="${repos[i].html_url}" target="_blank">
                 <section>
-                    <img src="${blog[i].top_image}">
-                    <div class="blog_container">
-                        <div class="section_title">${blog[i].title}</div>
-                        <div class="about_section">
-                            ${blog[i].sub_title}
-                        </div>
+                    <div class="section_title">${repos[i].name}</div>
+                    <div class="about_section">
+                    <span style="display:block;">${emoji.replace_colons(repos[i].description)}</span>
+                    </div>
+                    <div class="bottom_section">
+                        <span style="display:inline-block;"><i class="fas fa-code"></i>&nbsp; ${repos[i].language}</span>
+                        <span><i class="fas fa-star"></i>&nbsp; ${repos[i].stargazers_count}</span>
+                        <span><i class="fas fa-code-branch"></i>&nbsp; ${repos[i].forks_count}</span>
                     </div>
                 </section>
             </a>
             `);
         }
     }).fail(function(){
-        return document.getElementById("blog_section").style.display = "none";
-    });*/
+        return document.getElementById("work").style.display = "none";
+    });
 
     const secretCode = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba';
     let timer;
