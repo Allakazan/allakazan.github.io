@@ -2,17 +2,11 @@ markdown: kramdown
 theme: null
 permalink: /blog/:title:output_ext
 exclude:
-  - node_modules/
-  - package.json
-  - package-lock.json
-  - updateRepos.js
   - Gemfile
   - Gemfile.lock
   - README.md
 sass:
   style: compact # possible values: nested expanded compact compressed
-collections:
-  - repositories
 name: Bruno Marques
 username: Allakazan
 userimg: https://avatars0.githubusercontent.com/u/25016389?v=4
