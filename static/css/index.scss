@@ -3,6 +3,7 @@
 
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 @import url("https://fonts.googleapis.com/css?family=Questrial");
+@import "native.css";
 
 body {
   margin: 0%;
@@ -167,13 +168,21 @@ body {
   font-size: 17px;
   line-height: 25px;
   word-spacing: 1.2px;
-  margin: 5vh 0px;
+}
+
+#blog p:first-child {
+    margin-top: 5vh;
 }
 
 #blog p span {
   padding: 2px 4px;
   background: var(--text-color);
   color: var(--bg-color) !important;
+}
+
+#blog p span > code::selection {
+  color: var(--text-color) !important;
+  background: var(--bg-color) !important;
 }
 
 #blog img {

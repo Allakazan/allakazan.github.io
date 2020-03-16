@@ -42,7 +42,8 @@ layout: default
         <div id="blog_section">
             <h1>Blog.</h1>
             <div id="blogs">
-                {% for post in site.posts %}
+                {% assign latest = site.posts | sort: 'date' | reverse %}
+                {% for post in latest limit:3 %}
                     <a href="{{ post.url }}" target="_blank">
                         <section>
                             <img src="{{ post.thumbnail }}">

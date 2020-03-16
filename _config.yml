@@ -14,3 +14,9 @@ meta:
   title: Bruno Marques - Web Developer
   description: Welcome to the matrix. Full Stack Dev with experience in diverse technologies !
   image: https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&h=628&q=80
+jekyll_admin:
+  hidden_links:
+    - pages
+    - staticfiles
+    - datafiles
+    - configuration
